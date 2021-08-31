@@ -317,11 +317,11 @@ add3(1, 2)
 Void is a special type in TS that is used to tell the TS compiler not to look for a return in this function.  Void is different from `undefined` or `null` in that it has zero values wheres `undefined` is a declared variable that has not yet been given value and `null` is in fact an object.  
 more on Void [here](https://www.typescriptlang.org/docs/handbook/2/functions.html#void)
 ```ts
-// here we add two numbers but the third is declared optional with a `?` after it.
+// implicitly returns `void`
 const doesNothing = () => {
   console.log("this does nothing")
 }
-
+// with :void appended after our arguments this function now explicitly returns `void`
 const alsoDoesNothing = (): void => {
     console.log("both are void")
 }
@@ -343,7 +343,7 @@ Now for a more concrete example. Let's say we need a function that takes an argu
 ```ts
 // here we initialize a function to accept a Generic called something
 // then type our argument as the Generic something
-// lastly we return from this function a something array by appending the funciton :something[]
+// lastly we return from this function a something array by appending the funciton with :something[] after our arguments are declared
 let makeTypedArr = <something>(arg:something):something[] => {
     let typeArr:something[] = [];
     typeArr.push(arg);
