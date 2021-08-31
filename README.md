@@ -1,8 +1,12 @@
 # Intro to Typescript 
+This Readme will walk you through the fundamentals of working with Typescript.
+In it we will discuss setting up TS on our machine, some basics in working with TS types, defining our own types, working with functions, and finally the conept of generics.
+
 Quicklinks: 
 [Getting Started](#getting-started),
 [Basic Types](#basic-types)
 [Objects and Classes](#objects-and-classes)
+[Generics](#functions-and-generics)
 
     
 
@@ -194,7 +198,7 @@ type Point = {
 
 ### Interfaces
 
-Interfaces are used to define specific objects in TS and are very simmilar to Aliases but with one distinct difference; Aliases cannot be reopened after declaration, meaning once you declare values on an alias - thats it.  Interfaces can be extended with the use of the `implements` key word allowing new interfaces to be built based on the original interface values.
+Interfaces are used to define specific objects in TS and are very simmilar to Aliases but with one distinct difference; Aliases cannot be reopened after declaration, meaning once you declare values on an alias - thats it.  Interfaces can be extended with the use of the `extends` keyword allowing new interfaces to inherit values from the original Interface.
 
 ```TS
 // here is a simple dog interface with a kew of name and a value of string
@@ -254,6 +258,7 @@ class BankAccount {
 ```
  
 
+# Functions and Generics
 
 ### Functions
 
@@ -297,7 +302,7 @@ add3(1,2)
 
 ### Void 
 Void is a special type in TS that is used to tell the TS compiler not to look for a return in this function.  Void is different from `undefined` or `null` in that it has zero values wheres `undefined` is a declared variable that has not yet been given value and `null` is in fact an object.  
-more on Void [here](https://www.typescriptlang.org/docs/handbook/2/functions.html#void
+more on Void [here](https://www.typescriptlang.org/docs/handbook/2/functions.html#void)
 ```TS
 // here we add two numbers but the third is declared optional with a `?` after it.
 const doesNothing = () => {
@@ -315,13 +320,16 @@ const alsoDoesNothing = (): void => {
 Generics are what we use to implement a function that needs the flexibility of taking in any number of Types but still returns those types. To declare a Generic type for an class or funciton
 by doing the following:
 ```TS
-// The folliwing line declares an unknown
-const myGeneric = < unkownType > (arg:<unkownType>) :unknownType => {
+// The folliwing line declares a Generic called unkownType between the < > 
+const myGeneric = <unkownType> (arg:<unkownType>) :unknownType => {
     return arg
 }
 ```
-Example:  we need a function that takes an argument and returns an Array of the same type of argument with the original argument inside. 
+Now for a more concrete example. Let's say we need a function that takes an argument and returns an Array of the same type of argument with the original argument inside. 
 ```TS
+// here we initialize a function to accept a Generic called something
+// then type our argument as the Generic something
+// lastly we return from this function a something array by appending the funciton :something[]
 let makeTypedArr = <something>(arg:something):something[]=> {
     let typeArr:something[] = [];
     typeArr.push(arg);
@@ -329,6 +337,4 @@ let makeTypedArr = <something>(arg:something):something[]=> {
 }
 ```
 
-
     
-
