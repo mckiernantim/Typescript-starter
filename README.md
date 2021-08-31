@@ -6,7 +6,7 @@ Quicklinks:
 [Getting Started](#getting-started),
 [Basic Types](#basic-types),
 [Objects and Classes](#objects-and-classes),
-[Generics](#functions-and-generics)
+[Functions and Generics](#functions-and-generics)
 
     
 
@@ -59,7 +59,7 @@ Next, we need to make a .ts file in order to work with TS.
 Open `index.ts` and declare a variable with the following syntax :
 ```ts
 
-    let myVar = "Welcome to Typscript"
+ let myVar = "Welcome to Typescript"
 
 ```
 
@@ -73,7 +73,7 @@ Now we should see a new `index.js` file in our directory that Typescript compile
 # Basic Types
 documentation on basic types can be found [here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html)
  
- Typescript has defined types for all of the basic data types we use in JS.  In order to run develop with Typescript at its most efficent we need to invoke those Types to catch errors in development and take advantage of Typescripts robust Intellisense features. To type a variable we must provide it a `:` before delcaring the type.
+Typescript has defined types for all of the basic data types we use in JS.  In order to develop with Typescript at its most efficent we need to invoke those Types to catch errors in development and take advantage of Typescripts robust Intellisense features. To type a variable we must provide it a `:` before delcaring the type.
 For example:
 ```ts
     let myNum:number
@@ -83,7 +83,7 @@ The variable myNum can now be assigned a new value but that vlaue must be a <em>
 
 ### Any
 
-Variables with `any` type are just that - anything.  All ariables declared implicitly have `any` type. Using `any` should be avoided as it reduces the specificty of your type checking. Failing to define a type will throw an error as implicit any types are to be avoided.
+Variables with `any` type are just that - anything.  All ariables declared implicitly have `any` type. Using `any` should be avoided as it reduces the specificty of your type checking (or the whole point of TS). Failing to define a type will throw an error as implicit any types are to be avoided.
 
 ```ts
 Implicit `any` type.
