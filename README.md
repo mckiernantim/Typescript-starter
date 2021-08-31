@@ -4,8 +4,8 @@ In it we will discuss setting up TS on our machine, some basics in working with 
 
 Quicklinks: 
 [Getting Started](#getting-started),
-[Basic Types](#basic-types)
-[Objects and Classes](#objects-and-classes)
+[Basic Types](#basic-types),
+[Objects and Classes](#objects-and-classes),
 [Generics](#functions-and-generics)
 
     
