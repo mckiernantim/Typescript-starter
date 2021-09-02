@@ -1,46 +1,89 @@
-# Getting Started with Create React App
+# React and Typescript
+Useful Documentation: [React Typescript Cheat Sheet](https://github.com/typescript-cheatsheets/react#reacttypescript-cheatsheets), [Create-react-app TS docs](https://create-react-app.dev/docs/adding-typescript/#getting-started-with-typescript-and-react)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This README will walk us through how to set up a create-react-app using Typescirpt that is a simple Todo app that will allow users to create view a list of Todos .
+We will cover 
+ * [setting up a project](#getting-started) 
+ * [defining a data `interface` to use in our components](#defining-our-data)
+ * typing props we pass
+ * typing state updates 
+ * special steps needed to interact with React Dom elements in a TS environment
 
-In the project directory, you can run:
+# Getting Started
+Now that we have learned the fundamentals of using Typescript we need to learn how to implement it with React.  Luckily for us React and creat-react-app integrate with Typescript very smoothly.
 
-### `npm start`
+## Initializing Project
+To start ensure that you have typescript installed globally
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    $ npm i typescript -g
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To create a new project 
+    
+    $ npx create-react-app my-app-name --template typescript
 
-### `npm test`
+Our folder structure should look familiar but all our `.jsx` files are now `.tsx`
+and we have a `tsconfig.json` file and a `react-app-env.d.ts`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Our `tsconfig.json` file contains all the specifications for writing a React app in a TS environment and will run using the same scripts we are used to using in React.  
 
-### `npm run build`
+Our `react-app-env.d.ts` file tells Typescrtipt to use the node module
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    @Types/react
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Which Create-react-app installed for us which has a wide array of Interfaces and Types built specifically for use with React in a Typescript environment.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+More on [@Types/react here](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react)
 
-### `npm run eject`
+Before moving forward create a components directory, navigate into it and create 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    touch New.tsx List.tsx
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Import these components into our App.tsx for later use.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Defining Our Data
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+We know that Typescript requires us to define our data types every step along our code.  In order to build an app to display and manage a certain data type we need to tell TS that this type exists.  
 
-## Learn More
+In App.js lets declare and interface for our Todo resource
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```ts
+// our Todo interface will be the backbone of our app
+    export interface Todo{
+        title:string;
+        text:string;
+    }
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Now that we have a defined `Todo` type, lets set up a `Todo[]`  in `App.tsx` to populate our app based on our new type and its specifications.
+
+```ts
+const dummyData:Todo[] = [
+  {title:"first", text:"this is string"},
+  {title:"second", text:"this is string"},
+  {title:"third", text:"this is string"}
+]
+```
+
+# Set Up Our Components and State 
+Next, lets nest our `List` and `New` components inside of our `App` component so they are ready to receive props.
+
+Next, lets establish some state for our `App.tsx` file that <em> only </em> accepts a Todo array  by prepending `<Todo[]>` before our parenthesis.   
+
+```TS
+ const [todos, setTodos] = useState<Todo[]>(dummyData)
+```
+
+Head to `List.tsx` and lets get our component set up to accept props.  In order to pass props in a TS environment we need to define <em>a type for our props</em>.
+We need to declare an interface:  
+
+```TS
+interface IListProps{
+    todos:Todo[]
+}
+```
+Finally we need to type our props <em> to match our new interface </em>
+
+
+
+
