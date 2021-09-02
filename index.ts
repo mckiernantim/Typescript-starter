@@ -120,6 +120,8 @@ let makeTypedArr = <T>(arg:T) => {
 
 let x = "str"
 
+
+
 console.log(makeTypedArr(x))
 
 
