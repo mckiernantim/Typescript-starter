@@ -68,15 +68,21 @@ const dummyData:Todo[] = [
 # Set Up Our Components and State 
 Next, lets nest our `List` and `New` components inside of our `App` component so they are ready to receive props.
 
-Next, lets establish some state for our `App.tsx` file that <em> only </em> accepts a Todo array  by prepending `<Todo[]>` before our parenthesis.   
-
+Next, lets establish some state for our `App.tsx` file that <em> only </em> accepts a Todo array  by prepending `<Todo[]>` before our parenthesis.  
 ```TS
  const [todos, setTodos] = useState<Todo[]>(dummyData)
+ ```
+We will also need a function to pass the `New.tsx` component to update our todo state.  This function needs to accept a `todo` as the only argument.
+```TS   
+   const newTodo = (todo:Todo) => {
+    const allTodos = [...todos, todo] 
+    setTodos(allTodos)
+  }
 ```
 
 Head to `List.tsx` and lets get our component set up to accept props.  In order to pass props in a TS environment we need to define <em>a type for our props</em>.
 We need to declare an interface:  
-
+List.tsx
 ```TS
 interface IListProps{
     todos:Todo[]
@@ -86,6 +92,27 @@ Finally we need to type our props <em> to match our new interface </em> by decla
 ```TS
 export default function List(props:IListProps) {/* react magic goes here */}
 ```
+Then in `App.tsx` lets pass the props as normal from our `App.tsx` state
+App.tsx
+```TS
+ <List todos = {todos} />
+```
+
+Next, we need to do the same in `New.tsx`.  The only differnece is that our `New` component will recieve a `Function` from `App.tsx` as props rather than `Todo[]` data
+App.tsx
+```TS
+     <New addTodo = {newTodo}/>
+```
+New.tsx
+```TS
+interface INewProps {
+    addTodo:Function
+}
+export default function New(props:INewProps) { /* react component logic goes here */}
+```
+
+
+
 
 
 
