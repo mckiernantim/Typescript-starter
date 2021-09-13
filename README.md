@@ -182,11 +182,11 @@ const handleSubmit = (e:React.FormEvent) => {
 ```
 # Review
 In this walkthrough we learned that using TS with React requires some extra steps.  
-    * We need to Import `@types/React` in order to use prebuilt Types for our app
-    * Our data needs to be defined in an `interface` that we can use
-    * Our props need to be defined in our comonents to avoid TS errors for `implicit any types`
-    * When interacting with the DOM, we need to pass `React.ChangeEvent` for changes in Input or Text areas and a `React.FormEvent` for form submits.
-    * When using `React.ChangeEvent` TS needs us to specify what specific HTML element the `React.ChangeEvent` is wrapping. 
+ * We need to Import `@types/React` in order to use prebuilt Types for our app
+ * Our data needs to be defined in an `interface` that we can use
+ * Our props need to be defined in our comonents to avoid TS errors for `implicit any types`
+ * When interacting with the DOM, we need to pass `React.ChangeEvent` for changes in Input or Text areas and a `React.FormEvent` for form submits.
+ * When using `React.ChangeEvent` TS needs us to specify what specific HTML element the `React.ChangeEvent` is wrapping. 
     
 Now that we have succesfully tpyed all our props, typed our data, and typed the events and inputs to our state changing functions - TS knows <em> exactly what every single type of variable is at any given time </em> and we now have a simple todo app built with Typescript and understand the basic flow of transitioning to this powerful superset.
 
