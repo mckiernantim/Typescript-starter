@@ -82,7 +82,10 @@ interface IListProps{
     todos:Todo[]
 }
 ```
-Finally we need to type our props <em> to match our new interface </em>
+Finally we need to type our props <em> to match our new interface </em> by declaring our props with our new type
+```TS
+export default function List(props:IListProps) {/* react magic goes here */}
+```
 
 
 
