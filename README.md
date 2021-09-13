@@ -99,11 +99,14 @@ App.tsx
 ```
 
 Next, we need to do the same in `New.tsx`.  The only differnece is that our `New` component will recieve a `Function` from `App.tsx` as props rather than `Todo[]` data
+
 App.tsx
+
 ```TS
-     <New addTodo = {newTodo}/>
+<New addTodo = {newTodo}/>
 ```
 New.tsx
+
 ```TS
 interface INewProps {
     addTodo:Function
@@ -111,6 +114,74 @@ interface INewProps {
 export default function New(props:INewProps) { /* react component logic goes here */}
 ```
 
+Next, we establish state for our `New` component and create a form to connect the user input to that state.  Finally, we will fire the `props.addTodo()` function we recieved from `App.tsx` in our `handleSubmit()` function
+
+```TS
+export default function New(props:INewProps) {
+const [newText, setNewText] = useState<string>("")
+const [newTitle, setNewTitle] = useState<string>("")
+
+const handleText = (e) => {
+    let change = e.target.value;
+    setNewText(change)
+}
+const handleTitle = (e) => {
+    let change = e.target.value;
+    setNewTitle(change)
+
+}
+
+const handleSubmit = (e)) => {
+    e.preventDefault()
+    let newTodo:Todo = { title:newTitle, text:newText }
+    props.addTodo(newTodo)
+
+}
+    return (
+        <div>
+            <form>
+                <input type="text" value={newTitle} onChange={handleTitle}></input>
+                <textarea value={newText} onChange={handleText}></textarea>
+                <button type="submit" onClick = {handleSubmit}>add new</button>
+            </form>
+             New Text: {newText} New Title: {newTitle}
+        </div>
+    )
+}
+```
+
+Now that we have `New.tsx` ready for user input there is one more issue we need to resolve.  `handleText()` and `handleTitle()` both require an argument that we have yet to type!  In order to access attributes such as `e.target.value` in Typescript and React we must specify <em> what type of event  we are interacting with </em>.  There are many TS React event types but the easiest to work with is known as a `React.ChangeEvent`.  Let's update  `handleText()` and `handleTitle()`
+
+New.tsx
+
+```TS
+const handleText = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+    let change = e.target.value;
+    setNewText(change)
+}
+const handleTitle = (e:React.ChangeEvent<HTMLInputElement>) => {
+    let change = e.target.value;
+    setNewTitle(change)
+
+}
+```
+
+Notice that `ChangeEvent` is a `generic` - meaning it's expecting some sort of information regarding what the argument is.  In this case since we are calling `handleTitle()` on a `HTMLInputElement` we pass that type to the `React.ChangeEvent`.  The same is true iwth `handleText()` but instead we use a `HTMLTextAreaElement`
+
+Lastly, our `onSubmit()` function is called on an `HTMLForm`.  TS knows thata `form` will always be a `form` and therefore does not need any type information passed in.  We do need to define for TS what the event is that triggers the function.  In this case, we use a `React.FormEvent`.
+
+New.tsx
+
+```TS
+const handleSubmit = (e:React.FormEvent) => {
+    e.preventDefault()
+    let newTodo:Todo = { title:newTitle, text:newText }
+    props.addTodo(newTodo)
+
+}
+```
+
+Now that we have succesfully tpyed all our props, typed our data, and typed the events and inputs to our state changing functions - TS knows <em> exactly what every single type of variable is at any given time </em> and we now have a simple todo app built with Typescript.
 
 
 
