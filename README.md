@@ -1,4 +1,5 @@
 # Intro to Typescript 
+<bold>Note:</bold> for integrating React with TS check out the (final branch)[https://github.com/mckiernantim/Typescript-starter/final]
 This Readme will walk you through the fundamentals of working with Typescript.
 In it we will discuss setting up TS on our machine, some basics in working with TS types, defining our own types, working with functions, and finally the conept of generics.
 
@@ -350,3 +351,5 @@ let makeTypedArr = <something>(arg:something):something[] => {
     return typeArr
 }
 ```
+
+
