@@ -18,7 +18,7 @@ Typescript is a superset of Javascript devleoped by Microsoft.  Typescripts main
 Example: a simple JS function
 ```js
 const add = (a,b) => {
-    return a+b
+    return a + b
 }
 // Great!
 add(1,2) 
@@ -28,7 +28,7 @@ add(1,"2")
 Now in TS:
 ```TS
 const add = (a:number, b:number) => {
-    return a+b
+    return a + b
 }
 // No error
 add(1,2)
@@ -84,7 +84,7 @@ The variable myNum can now be assigned a new value but that vlaue must be a <em>
 
 ### Any
 
-Variables with `any` type are just that - anything.  All ariables declared implicitly have `any` type. Using `any` should be avoided as it reduces the specificty of your type checking (or the whole point of TS). Failing to define a type will throw an error as implicit any types are to be avoided.
+Variables with `any` type are just that - anything.  All variables declared implicitly have `any` type. Using `any` should be avoided as it reduces the specificty of your type checking (or the whole point of TS). Failing to define a type will throw an error as implicit any types are to be avoided.
 
 ```ts
 // Implicit `any` type.
@@ -166,7 +166,7 @@ let numARr:number[] = [1,2,3]
 A Tuple is a type of an array that requires specific types in a specific order.  It's a new concept that we don't see in JS but TS allows us to check that an array we declare matches the pattern we set forth.  Tuples must be initialized before assigning values.
 
 ```ts
-// Here we declare the Type of myTup with : and say it MUST have a strong, number, and Function. 
+// Here we declare the Type of myTup with : and say it MUST have a string, number, and Function. 
 let myTup: [string, number, Function]
 
 // Here we define values that correspond to our Tuple rules we declared on myTup
@@ -186,7 +186,7 @@ let myTup:[string, number] = ["hi", 2]
 myTup.push(1)
 
 // this will not 
-myTup[3] = 1
+myTup[2] = 1
 ```
 # Objects and Classes
 For a deep dive on Objects click [here](https://www.typescriptlang.org/docs/handbook/2/objects.html)
@@ -194,9 +194,11 @@ For a deep dive on Objects click [here](https://www.typescriptlang.org/docs/hand
 At the core of TS is the concept of reusing code.  Eventually we will run into a situation where we want to define a type to keep our code DRY.  Aliases allow us to store type declaration in a variable for later use.  Aliases can be used to define an object type or as a variable for primitives
 ```ts
 // we declare a new Type that can be used in our files
+
 type stringNum = string | number
 
 // here we define a Point type and TS will check that any point we declare has an X and Y value that both are numbers
+
 type Point = {
      x:number,
      y:number
@@ -205,7 +207,7 @@ type Point = {
 
 ### Interfaces
 
-Interfaces are used to define specific objects in TS and are very simmilar to Aliases but with one distinct difference; Aliases cannot be reopened after declaration, meaning once you declare values on an alias - thats it.  Interfaces can be extended with the use of the `extends` keyword allowing new interfaces to inherit values from the original Interface.
+Interfaces are used to define specific objects in TS and are very simmilar to Aliases but with one distinct difference; Aliases cannot be reopened after declaration, meaning once you declare values on an alias - thats it.  Interfaces can be extended with the use of the `extends` keyword, much like classes, allowing new interfaces to inherit values from the original Interface.
 
 ```TS
 // here is a simple dog interface with a kew of name and a value of string
@@ -287,8 +289,8 @@ let otherFunc = () => {
 
 Additionally, TS allows us to specify what our function <em> returns </em>
 ```ts
-// By adding :number after our () we let TS know that this function not only MUST return a value but that value MUST be a number.
-const myFunc:Function = () :number => { 
+// By adding `:number` after our `()` we let TS know that this function not only MUST return a value but that value MUST be a number.
+const myFunc:Function = ():number => { 
     return 1 
 }
 ```
@@ -342,10 +344,10 @@ const myGeneric = <unkownType> (arg:<unkownType>) :unknownType => {
 
 Now for a more concrete example. Let's say we need a function that takes an argument and returns an Array of the same type of argument with the original argument inside. 
 ```ts
-// here we initialize a function to accept a Generic called something
-// then type our argument as the Generic something
+// here we initialize a function to accept a Generic called `something`
+// then type our argument as the Generic `something` wrapping it in `< >`
 // lastly we return from this function a something array by appending the funciton with :something[] after our arguments are declared
-let makeTypedArr = <something>(arg:something):something[] => {
+let makeTypedArr = <something> (arg:something) :something[] => {
     let typeArr:something[] = [];
     typeArr.push(arg);
     return typeArr
